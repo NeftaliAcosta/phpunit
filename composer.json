@@ -41,7 +41,8 @@
       },
       "pre-commit": [
         "echo committing as $(git config user.name)",
-        "php-cs-fixer fix ."
+        "php-cs-fixer fix .",
+        ".\\vendor\\bin\\phpunit"
       ],
       "commit-msg": "grep -q '[A-Z]+-[0-9]+.*' $1",
       "pre-push": [
