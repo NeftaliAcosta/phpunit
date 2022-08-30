@@ -39,10 +39,16 @@
       "config": {
         "stop-on-failure": ["pre-push"]
       },
+      "pre-commit": [
+        "echo committing as $(git config user.name)",
+        "php-cs-fixer fix ."
+      ],
+      "commit-msg": "grep -q '[A-Z]+-[0-9]+.*' $1",
       "pre-push": [
         "php-cs-fixer fix --dry-run --stop-on-violation .",
         "phpunit"
-      ]
+      ],
+      "post-merge": "composer dump-autoload"
     }
   }
 }
