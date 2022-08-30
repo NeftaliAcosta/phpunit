@@ -6,7 +6,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9",
-    "opsway/psr12-strict-coding-standard": "^0.7.0"
+    "opsway/psr12-strict-coding-standard": "^0.7.0",
+    "brainmaestro/composer-git-hooks": "^2.8"
   },
   "autoload": {
     "psr-4": {
@@ -31,6 +32,17 @@
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "extra": {
+    "hooks": {
+      "config": {
+        "stop-on-failure": ["pre-push"]
+      },
+      "pre-push": [
+        "php-cs-fixer fix --dry-run --stop-on-violation .",
+        "phpunit"
+      ]
     }
   }
 }
